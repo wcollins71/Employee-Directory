@@ -1,40 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.css";
 
-class Searchbar extends Component {
-  state = {
-    searchTerm: "",
-  };
+function Searchbar(props) {
 
-  handleInputChange = (event) => {
-    // Getting the value and name of the input which triggered the change
-    const { name, value } = event.target;
 
-    // Updating the input's state
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  render() {
     return (
       <div className="searchbox">
-        <p>
-          Search term {this.state.searchTerm}
-        </p>
         <form>
           <input
             className="form-control"
-            value={this.state.searchTerm}
+            value={props.value}
             name="searchTerm"
-            onChange={this.handleInputChange}
+            onChange={props.handleInputChange}
             type="text"
             placeholder="Search"
           />
         </form>
       </div>
     );
-  }
+
 }
 
 export default Searchbar;

@@ -1,25 +1,8 @@
-import React, { Component } from "react";
-import Api from "../../utils/api";
-import TableData from "./tableData";
+import React from "react";
 import Moment from "react-moment";
+import "./index.css";
 
-class Table extends Component {
-  state = {
-    results: [],
-  };
-
-  componentDidMount() {
-    Api.getUsers()
-      .then((res) =>
-        this.setState({
-          results: res.data.results,
-          // filteredEmployees: res.data.results
-        })
-      )
-      .catch((err) => console.log(err));
-  }
-
-  render() {
+function Table(props) {
     return (
       <table className="tableEmployees table table-striped">
         <thead>
@@ -32,15 +15,16 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {/* <TableData results={this.state.results} /> */}
-          {this.state.results.map((result) => (
+          {props.results.map((result) => (
             <tr>
               <td>
                 <img className="" src={result.picture.medium} alt="" />
               </td>
               <td>{result.name.first}</td>
               <td>{result.name.last}</td>
-              <td>{result.email}</td>
+              <td className="email">
+                <a href={"mailto:" + result.email}>{result.email}</a>
+              </td>
               <td>
                 <Moment format="DD/MM/YYYY">{result.dob.date}</Moment>
               </td>
@@ -50,6 +34,6 @@ class Table extends Component {
       </table>
     );
   }
-}
+
 
 export default Table;
