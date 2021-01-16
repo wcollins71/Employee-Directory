@@ -6,19 +6,31 @@ class Searchbar extends Component {
     searchTerm: "",
   };
 
+  handleInputChange = (event) => {
+    // Getting the value and name of the input which triggered the change
+    const { name, value } = event.target;
+
+    // Updating the input's state
+    this.setState({
+      [name]: value,
+    });
+  };
+
   render() {
     return (
       <div className="searchbox">
-        <form className="form">
+        <p>
+          Search term {this.state.searchTerm}
+        </p>
+        <form>
           <input
+            className="form-control"
             value={this.state.searchTerm}
             name="searchTerm"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="First Name"
+            placeholder="Search"
           />
-
-          <button type="submit">Search</button>
         </form>
       </div>
     );
